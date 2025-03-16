@@ -1,6 +1,10 @@
 {% extends 'base.html'%}
 
 {%block content%}
+
+{% load cart %}
+
+<!-- body-->
 <div class="container-fluid mt-3">
   <div class="row">
     <!-- filter-->
@@ -22,8 +26,21 @@
           <div class="card-body">
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text"><b>{{product.price}}</b></p>
-            <a href="#" class="btn btn-primary">Add To Cart</a>
+            {{product | is_in_cart:request.session.cart }}
           </div>
+          <div class="card-footer row nu-gutters">
+            <form action="/" method = "POST" class="btn-block">
+              {% csrf_token %}
+              <input hidden type="text" name = "product" value = '{{product.id}}'>
+              <input type = "submit" class="btn btn-primary w-100 form-control" value ="Add To Cart">
+            </form>
+            <div class="row">
+                <input type="Submit" value = " - " class = "col-2 btn-block btn-secondary">
+                <div class = "text-center col">2 in cart</div>
+                <input type="Submit" value = " + " class = "col-2 btn-block btn-secondary">
+            </div>
+          </div>
+          
         </div>
         {% endfor %}
       </div>
