@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from .models.product import Product
 from .models.category import Category
 from .models.customer import Customer
+from django.views import View
 
 # Create your views here.
 def index(request):
