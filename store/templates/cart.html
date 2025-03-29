@@ -1,0 +1,46 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+{% load cart %}
+<div class="container">
+    <div class = 'border rounded p-4 m-4'>
+            <p class = "display-4 pl-4 ml-4">My Cart</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><img style = "height: 80px"src="{{product.image.url}}" class="rounded circle" alt=""></td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product|cart_quantity:request.session.cart}}</td>
+                        <td>{{product|price_total:request.session.cart}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan = "3"></th>
+                        <th colspan = "">Total</th>
+                        <th>{{products|total_cart_price:request.session.cart}}</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class = "d-flex justify-content-end m-3 p-3">
+                <a href="#" class = "btn btn-primary border rounded col-lg-3 float-end">Place Order</a>
+            </div>
+
+    </div>
+</div>
+{% endblock %}
