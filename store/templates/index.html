@@ -3,6 +3,7 @@
 {%block content%}
 
 {% load cart %}
+{% load custom_filter%}
 
 <!-- body-->
 <div class="container-fluid mt-3">
@@ -25,7 +26,7 @@
           <img src="{{product.image.url}}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{product.name}}</h5>
-            <p class="card-text"><b>{{product.price}}</b></p>
+            <p class="card-text"><b>{{product.price|currency}}</b></p>
             <!-- {{product|is_in_cart:request.session.cart }} -->
           </div>
           <div class="card-footer p-0">
