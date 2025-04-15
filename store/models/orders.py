@@ -11,3 +11,7 @@ class Order(models.Model):
     address = models.CharField(max_length = 100, default = '', blank = True)
     phone = models.CharField(max_length = 15, default = '', blank = True)
     date = models.DateField(default=datetime.datetime.today)
+
+
+    def placeOrder(self):
+        self.save()
